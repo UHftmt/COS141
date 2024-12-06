@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Register</title>
+    </head>
+
+    <body>
+        <main>
+            <p>[Feitian College] Signup</p>
+
+            <form action="{{ url_for('register') }}" method="post" autocomplete="off">
+           
+                <p>
+                    <input type="text" name="fullname" id="fullname" placeholder="Enter your Full Name" />
+                </p>
+
+                <p>
+                    <input type="text" name="username" id="username" placeholder="Enter your Username" required />
+                </p>
+
+                <p>
+                    <input type="text" name="email" id="email" placeholder="Enter your Email" />
+                </p>
+            
+                <p>
+                    <input type="password" name="password" id="password" placeholder="Password" required placeholder="Enter your Password" />
+                </p>
+            
+            
+                <div id="msg">{{ msg }}</div>
+                <button type="submit" value="Register" name="">Sign up</button>
+        
+                <p>
+                    <a href="{{ url_for('login') }}">Login</a>
+                </p>
+
+            </form>
+        </main>
+
+    </body>
+</html>
