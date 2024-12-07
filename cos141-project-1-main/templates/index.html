@@ -6,7 +6,7 @@
     <body>
         <main>
 
-            <p>[Feitian College]Login</p>
+            <h1>[Feitian College]Login</h1>
 
             <form class="form-group" action="{{ url_for('login') }}" method="post">
 
@@ -18,7 +18,7 @@
                     <input type="password" class="form-control" name="password" placeholder="Password" id="password" required />
                 </p>
 
-                <br><button type="submit" value="Login" name="" >Login</button>
+                <button type="submit" value="Login" name="" >Login</button>
 
             </form>
 
@@ -32,6 +32,7 @@
 </html>
 
 <style>
+
     body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -44,7 +45,7 @@
         margin: 40px auto;
         padding: 40px;
         background-color: white;
-        border-radius: 8px;
+        border-radius: 10px;
         box-shadow: 0.3em 0.3em 1em rgb(158, 157,157, 30%);
     }
 
@@ -72,5 +73,5 @@
         border: none;
         cursor: pointer;
     }
-    
+
 </style>

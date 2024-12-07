@@ -1,0 +1,56 @@
+{% extends 'layout.html' %} 
+{% block title %} Profile {% endblock %} 
+{% block content %}
+
+<h1>Account Settings</h1>
+
+<body>
+    <form action="{{ url_for('setting')}}" method="post" autocapitalize="off">
+        <div><strong>Chnage Password</strong></div>
+        <div>
+            <input type="text", name="password", id="password", placeholder="Enter new password" > 
+        </div>
+
+        <div><strong>Update Email</strong></div>
+        
+        <div id="msg">{{msg}}</div>
+        <div>
+            <input type="text", name="email", id="email", placeholder="Enter your email" > 
+        </div>
+        <div>
+            <a href="{{url_for('profile')}}"><button type="submit" value="update" name="">Save Changes</button></a>
+        </div>
+    </form>
+</body>
+
+<style>
+    div {
+        text-align: left;
+        padding: 5px 0;
+        font-size: 20px;
+    }
+
+    button {
+        width: 120px;
+        margin: 20 0 0 0;
+        padding: 10px;
+        background-color: blue;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        font-size: 12px;
+    }
+
+    input {
+        font-size: 18px;
+        width: 100%;
+        max-width: 400px;
+        height: 35px;
+        border: 1px solid gray;
+        border-radius: 2px;
+    }
+
+</style>
+
+{% endblock %}

@@ -165,23 +165,52 @@ def profile():
     # user is not loggedin redirect to login page
     return redirect(url_for("login"))
 
-@app.route("/newsletter", methods=['GET','POST'])
-def newsletter():
-    if request.method == "POST":
-        fullname = request.form["fullname"]
-        email = request.form["email"]
+@app.route("/setting", methods=['GET','POST'])
+def setting():
+    # check if account exists using MySQL
+    conn = mysql.connect()
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
 
-        conn = mysql.connect()
-        cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute(
-            "INSERT INTO users VALUES (NULL, %s, %s)",
-                (fullname,email),
-        )
-        conn.commit()
-        msg = "Successfully inserted into user's table"
+    # output message if something goes wrong...
+    msg = ""
+
+     # check if user is loggedin
+    if "loggedin" in session:
+        if request.method == "POST":
+            new_password = request.form.get("password")
+            new_email = request.form.get("email")
+
+            if not new_email and not new_password:
+                msg = "please type your new password or email."
+            else:
+                if new_email:
+                    if not re.match(r"[^@]+@[^@]+\.[^@]+", new_email):
+                        msg = "Invalid email address!"
+                    else:
+                        cursor.execute("SELECT id from accounts WHERE email = %s", (new_email))
+                        email_used = cursor.fetchone()
+                        if email_used:
+                            msg = "The email is being used."
+                        else:
+                            cursor.execute("UPDATE accounts SET email = %s WHERE id = %s", [new_email, session["id"]])
+                            msg = "New information updated!"
+                            conn.commit()
+                else:
+                    cursor.execute("SELECT password from accounts WHERE password = %s AND id = %s", [new_password, session["id"]])
+                    same_pw = cursor.fetchone()
+                    if same_pw:
+                         msg = "You can't use the same password."
+                    else:
+                        cursor.execute("UPDATE accounts SET password = %s WHERE id = %s", [new_password, session["id"]])
+                        msg = "New information updated!"
+                        conn.commit()
+    
     else:
-        fullname = "Gai"
-    return render_template("newsletter.html", fullname=fullname, msg=msg)
+        # user is not loggedin redirect to login page
+        return redirect(url_for("login"))
+
+    # show registration form with message (if any)
+    return render_template("setting.html", msg=msg)
 
 
 

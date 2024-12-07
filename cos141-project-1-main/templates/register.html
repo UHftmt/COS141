@@ -5,7 +5,7 @@
 
     <body>
         <main>
-            <p>[Feitian College] Signup</p>
+            <h1>[Feitian College] Signup</h1>
 
             <form action="{{ url_for('register') }}" method="post" autocomplete="off">
            
@@ -22,15 +22,15 @@
                 </p>
             
                 <p>
-                    <input type="password" name="password" id="password" placeholder="Password" required placeholder="Enter your Password" />
+                    <input type="password" name="password" id="password" placeholder="Enter your Password" />
                 </p>
             
             
                 <div id="msg">{{ msg }}</div>
                 <button type="submit" value="Register" name="">Sign up</button>
         
-                <p>
-                    <a href="{{ url_for('login') }}">Login</a>
+                <p style="text-align: center;">
+                    <a href="{{ url_for('login') }}">Already have an account? Login</a>
                 </p>
 
             </form>
@@ -38,3 +38,48 @@
 
     </body>
 </html>
+
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: whitesmoke;
+    }
+
+    main {
+        max-width: 400px;
+        margin: 40px auto;
+        padding: 40px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0.3em 0.3em 1em rgb(158, 157,157, 30%);
+    }
+
+    main h1 {
+        text-align: center;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    select,
+    textarea {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+    }
+
+    button {
+        width: 400px;
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+</style>
