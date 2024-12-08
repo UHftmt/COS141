@@ -181,7 +181,7 @@ def setting():
             new_email = request.form.get("email")
 
             if not new_email and not new_password:
-                msg = "please type your new password or email."
+                msg = "Hm? I can't read your mind dude"
             else:
                 if new_email:
                     if not re.match(r"[^@]+@[^@]+\.[^@]+", new_email):
@@ -193,8 +193,8 @@ def setting():
                             msg = "The email is being used."
                         else:
                             cursor.execute("UPDATE accounts SET email = %s WHERE id = %s", [new_email, session["id"]])
-                            msg = "New information updated!"
                             conn.commit()
+                            return redirect(url_for("profile"))
                 else:
                     cursor.execute("SELECT password from accounts WHERE password = %s AND id = %s", [new_password, session["id"]])
                     same_pw = cursor.fetchone()
@@ -202,8 +202,8 @@ def setting():
                          msg = "You can't use the same password."
                     else:
                         cursor.execute("UPDATE accounts SET password = %s WHERE id = %s", [new_password, session["id"]])
-                        msg = "New information updated!"
                         conn.commit()
+                        return redirect(url_for("profile"))
     
     else:
         # user is not loggedin redirect to login page
